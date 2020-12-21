@@ -9,20 +9,54 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-        <q-input dense outlined placeholder="Search..." color="positive"
-                 style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);">
+        <q-input dense outlined placeholder="Search..." color="positive">
           <template v-slot:append>
             <q-icon name="search"/>
           </template>
         </q-input>
         <q-space/>
-        <q-btn icon="notifications" dense flat
+        <q-btn icon="notifications" dense flat push
                style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
-        />
+        >
+          <q-badge color="transparent" floating>
+            <q-icon name="mdi-alert-decagram" size="16px" color="red"></q-icon>
+          </q-badge>
+        </q-btn>
         <q-btn icon="message" dense
                flat style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
         />
         <q-toggle v-model="toggle" icon="mdi-brightness-4" icon-color="blue-grey-9" @toggle="this.$q.dark.isActive = !this.$q.dark.isActive"/>
+        <q-btn-dropdown
+          icon="person"
+          dense flat
+          style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
+        >
+          <div class="row no-wrap q-pa-md">
+            <div class="column">
+              <div class="text-h6 q-mb-md">Settings</div>
+              <q-toggle v-model="toggle" label="Use Mobile Data" />
+              <q-toggle v-model="toggle" label="Bluetooth" />
+            </div>
+
+            <q-separator vertical inset class="q-mx-lg" />
+
+            <div class="column items-center">
+              <q-avatar size="72px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              </q-avatar>
+
+              <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+
+              <q-btn
+                color="primary"
+                label="Logout"
+                push
+                size="sm"
+                v-close-popup
+              />
+            </div>
+          </div>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
@@ -44,7 +78,7 @@
         >
           <q-breadcrumbs active-color="positive" separator-color="grey-5">
             <q-breadcrumbs-el label="Dashboard" icon="mdi-view-dashboard-outline" />
-            <q-breadcrumbs-el label="Components" icon="widgets" />
+            <q-breadcrumbs-el label="Main" icon="widgets" />
           </q-breadcrumbs>
         </q-item-label>
         <q-item v-for="link in essentialLinks" :key="link.title"
