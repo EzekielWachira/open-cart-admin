@@ -5,7 +5,7 @@
         <q-btn
           flat
           dense
-          icon="menu" style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288)"
+          icon="mdi-backburger" style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288)"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
@@ -25,7 +25,6 @@
         <q-btn icon="message" dense
                flat style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
         />
-        <q-toggle v-model="toggle" icon="mdi-brightness-4" icon-color="blue-grey-9" @toggle="this.$q.dark.isActive = !this.$q.dark.isActive"/>
         <q-btn-dropdown
           icon="person"
           dense flat
@@ -105,6 +104,12 @@
     </q-drawer>
 
     <q-page-container>
+      <div class="column absolute-right shadow-10 bg-white" style="height: 23%; top: 40%; z-index: 100">
+        <q-btn flat color="primary" icon="facebook"></q-btn>
+        <q-btn flat color="blue-6" icon="mdi-twitter"></q-btn>
+        <q-btn flat color="blue-10" to="https://www.linkedin.com/in/ezekielwachira" target="_blank" tag="a" icon="mdi-linkedin"></q-btn>
+        <q-toggle v-model="toggle" icon="mdi-brightness-4" icon-color="blue-grey-9" @toggle="this.$q.dark.isActive = !this.$q.dark.isActive"/>
+      </div>
       <router-view />
     </q-page-container>
   </q-layout>

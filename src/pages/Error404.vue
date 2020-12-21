@@ -1,7 +1,7 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="fullscreen bg-blue-grey-10 text-white text-center q-pa-md flex flex-center">
     <div>
-      <div style="font-size: 30vh">
+      <div style="font-size: 30vh" class="text-positive">
         404
       </div>
 
@@ -11,8 +11,8 @@
 
       <q-btn
         class="q-mt-xl"
-        color="white"
-        text-color="blue"
+        color="positive"
+        text-color="white"
         unelevated
         to="/"
         label="Go Home"
