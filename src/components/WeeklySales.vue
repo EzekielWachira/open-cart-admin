@@ -1,0 +1,81 @@
+<template>
+    <q-card class="text-white" flat>
+      <q-card-section>
+<!--        <apexchart width="280" type="donut" :options="options" :series="series"></apexchart>-->
+        <apexchart type="bar" height="250" :options="chartOptions" :series="series"></apexchart>
+      </q-card-section>
+    </q-card>
+</template>
+
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import Chart from 'chart.js'
+import VueApexCharts from 'vue-apexcharts'
+import apexchart from 'vue-apexcharts'
+
+@Component({
+  components: { apexchart, VueApexCharts }
+})
+export default class ClassComponent extends Vue {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  // readonly options: object | undefined
+  private options: Object = {}
+  // private series: number[] = [44, 55, 41, 17, 15]
+
+  private series = [{
+    name: 'Net Profit',
+    data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+  }, {
+    name: 'Revenue',
+    data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+  }, {
+    name: 'Free Cash Flow',
+    data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+  }]
+  private chartOptions: Object = {
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '55%',
+        endingShape: 'rounded'
+      },
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      show: true,
+      width: 2,
+      colors: ['transparent']
+    },
+    xaxis: {
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    yaxis: {
+      title: {
+        text: '$ (thousands)'
+      }
+    },
+    fill: {
+      opacity: 1
+    },
+    tooltip: {
+      y: {
+        formatter: function (val: any) {
+        return "$ " + val + " thousands"
+      }
+    }
+  }
+}
+
+  mounted () {
+  }
+
+}
+</script>
+<style lang="scss" scoped>
+</style>

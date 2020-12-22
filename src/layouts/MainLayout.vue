@@ -8,6 +8,7 @@
           icon="mdi-backburger" style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288)"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
+          :class="{ 'rotate': leftDrawerOpen }"
         />
         <q-input dense outlined placeholder="Search..." color="positive">
           <template v-slot:append>
@@ -132,7 +133,7 @@ export default class MainLayout extends Vue {
 <style lang="scss" scoped>
 .q-item.q-router-link--active{
   background: #37474f;
-  box-shadow: -3px -3px 7px #455a64, 3px 3px 5px rgba(94, 104, 121, .288);
+  box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
   color: #21BA45;
 }
 .neumorphism-outer{
@@ -159,5 +160,9 @@ export default class MainLayout extends Vue {
   width: 80%;
   border-radius: 50%;
   box-shadow: inset -3px -3px 7px #ffffff73, inset 3px 3px 5px rgba(94, 104, 121, .288);
+}
+.rotate{
+  transform: rotate(-180deg) ;
+  transition: .7s ease-in;
 }
 </style>
