@@ -97,15 +97,18 @@
           </q-item-section>
         </q-item>
       </q-list>
-      <div class="row absolute-bottom justify-between q-px-lg q-py-md">
-        <q-btn icon="person" color="blue-grey-6" dense/>
-        <q-btn icon="settings" color="blue-grey-8" dense/>
-        <q-btn icon="mdi-exit-run" color="red" dense/>
+      <div class="row absolute-bottom justify-between q-px-lg q-py-md" style="bottom: 20px">
+        <q-btn icon="person" dense flat style="background: #37474f; box-shadow: inset 5px 5px 10px #2b383e, inset -5px -5px 10px #435660;"/>
+        <q-btn icon="settings" dense flat style="background: #37474f; box-shadow: inset 5px 5px 10px #2b383e, inset -5px -5px 10px #435660;"/>
+        <q-btn icon="mdi-exit-run" style="background: #37474f; box-shadow: inset 5px 5px 10px #2b383e, inset -5px -5px 10px #435660;" dense flat/>
+      </div>
+      <div class="absolute-bottom text-center copy" style="font-size: 12px">
+        &copy;{{ new Date().getFullYear() }} Ezekiel Wachira
       </div>
     </q-drawer>
 
     <q-page-container>
-      <div class="column absolute-right shadow-10 bg-white" style="height: 23%; top: 40%; z-index: 100">
+      <div class="column absolute-right shadow-10 bg-white fixed-right" style="height: 23%; top: 40%; z-index: 100">
         <q-btn flat color="primary" icon="facebook"></q-btn>
         <q-btn flat color="blue-6" icon="mdi-twitter"></q-btn>
         <q-btn flat color="blue-10" to="https://www.linkedin.com/in/ezekielwachira" target="_blank" tag="a" icon="mdi-linkedin"></q-btn>
@@ -164,5 +167,8 @@ export default class MainLayout extends Vue {
 .rotate{
   transform: rotate(-180deg) ;
   transition: .7s ease-in;
+}
+.copy{
+  //transform: rotate(90deg);
 }
 </style>

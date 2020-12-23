@@ -78,4 +78,7 @@ export default class ClassComponent extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+#SvgjsTspan4558{
+  color: white;
+}
 </style>

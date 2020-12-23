@@ -21,6 +21,58 @@ export class RecentOrders {
     { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a: any, b:any) => parseInt(a, 10) - parseInt(b, 10) }
   ]
 
+  public recentOrdersColumns = [
+    { name: 'image', align: 'left', label: 'Product Image', field: 'image', sortable: false },
+    { name: 'name', align: 'center', label: 'Name', field: 'name', sortable: true },
+    { name: 'quantity', align: 'center', label: 'Quantity', field: 'quantity', sortable: true },
+    { name: 'customer_name', align: 'center', label: 'Customer Name', field: 'customer_name', sortable: true },
+    { name: 'location', align: 'center', label: 'Location', field: 'location', sortable: true },
+    { name: 'payment_type', align: 'center', label: 'Payment Type', field: 'payment_type' }
+  ]
+
+  public recentOrdersData = [
+    {
+      image: '../images/nike.png',
+      name: 'Nike Air Max',
+      quantity: 5,
+      customer_name: 'John Doe',
+      location: 'Westlands',
+      payment_type: 'cash'
+    },
+    {
+      image: '../images/nike.png',
+      name: 'Nike Air Max',
+      quantity: 5,
+      customer_name: 'John Doe',
+      location: 'Westlands',
+      payment_type: 'cash'
+    },
+    {
+      image: '../images/nike.png',
+      name: 'Nike Air Max',
+      quantity: 5,
+      customer_name: 'John Doe',
+      location: 'Westlands',
+      payment_type: 'cash'
+    },
+    {
+      image: '../images/nike.png',
+      name: 'Nike Air Max',
+      quantity: 5,
+      customer_name: 'John Doe',
+      location: 'Westlands',
+      payment_type: 'cash'
+    },
+    {
+      image: '../images/nike.png',
+      name: 'Nike Air Max',
+      quantity: 5,
+      customer_name: 'John Doe',
+      location: 'Westlands',
+      payment_type: 'cash'
+    }
+  ]
+
   public data = [
     {
       image: 'https://cms-cdn.thesolesupplier.co.uk/2018/02/Nike-Air-Max-270-Light-Bone-AH8050-003-03.png',

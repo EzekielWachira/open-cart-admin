@@ -1,7 +1,7 @@
 <template>
     <q-card class="sales">
       <q-card-section>
-        Sales Analytics
+        {{ title }}
       </q-card-section>
       <q-card-section>
         <weekly-sales />
@@ -17,6 +17,7 @@ import WeeklySales from "components/WeeklySales.vue";
   components: { WeeklySales }
 })
 export default class ClassComponent extends Vue {
+  @Prop({ default: 'Sales Analytics' }) readonly title!: string
 }
 </script>
 <style lang="scss" scoped>

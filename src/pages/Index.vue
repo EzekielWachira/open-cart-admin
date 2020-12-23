@@ -29,7 +29,15 @@
         <div class="col-12 col-md-6 col-sm-6 q-px-xs">
           <recent-orders />
         </div>
-        <div class="col-12 col-md-6 col-sm-6 q-px-xs"></div>
+        <div class="col-12 col-md-6 col-sm-6 q-px-xs">
+          <deliveries />
+        </div>
+      </div>
+      <div class="row q-mt-lg q-gutter-y-xs">
+        <div class="col-12 col-md-6 col-sm-12 q-px-xs">
+          <sales-analytics title="Profit"/>
+        </div>
+        <div class="col-12 col-md-6 col-sm-12 q-px-xs"></div>
       </div>
     </div>
   </q-page>
@@ -48,11 +56,12 @@ import Customer from 'components/Customer.vue'
 import SalesAnalytics from "components/SalesAnalytics.vue"
 import TopSelllingProduct from "components/TopSelllingProduct.vue";
 import RecentOrders from "components/RecentOrders.vue";
+import Deliveries from "components/Deliveries.vue";
 import { pathToFileURL } from 'url'
 
 @Component({
   components: { Sales, WeeklySales, Sales2, Orders, Product, Customer, SalesAnalytics,
-  TopSelllingProduct, RecentOrders }
+  TopSelllingProduct, RecentOrders,Deliveries }
 })
 export default class PageIndex extends Vue {
   // url = openURL('../meee.mkv')

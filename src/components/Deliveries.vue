@@ -2,7 +2,7 @@
     <q-card class="sales">
       <q-card-section>
         <q-table
-          title="Recent Orders"
+          title="Recent Deliveries"
           :data="recentOrder.recentOrdersData"
           :columns="recentOrder.recentOrdersColumns"
           row-key="name" hide-bottom flat
