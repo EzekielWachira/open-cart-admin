@@ -21,7 +21,7 @@ npm run lint
 ```bash
 quasar build
 ```
-## Some screensots
+## Some screenshots
 <img src="https://github.com/EzekielWachira/open-cart-admin/blob/main/Screenshot%20(1093).png" />
 <img src="https://github.com/EzekielWachira/open-cart-admin/blob/main/Screenshot%20(1097).png" />
 
