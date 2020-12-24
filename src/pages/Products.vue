@@ -2,7 +2,7 @@
   <q-page>
     <div class="q-pa-md">
       <q-toolbar>
-        <q-toolbar-title class="text-blue-grey-10">Products</q-toolbar-title>
+        <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category" style="background: #37474f" />
         <q-btn icon-right="mdi-playlist-plus" class="text-white" label="New Product" style="background: #37474f"/>

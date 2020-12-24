@@ -1,14 +1,18 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="bg-white">
-      <q-toolbar class="q-gutter-x-sm text-blue-grey-9">
+    <q-header elevated
+              :class="{'bg-blue-grey-9 text-white': $q.dark.isActive}"
+    >
+      <q-toolbar class="q-gutter-x-sm"
+                 :class="{ 'text-white': $q.dark.isActive }"
+      >
         <q-btn
           flat
           dense
-          icon="mdi-backburger" style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288)"
+          icon="mdi-backburger"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
-          :class="{ 'rotate': leftDrawerOpen }"
+          :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         />
         <q-input dense outlined placeholder="Search..." color="positive">
           <template v-slot:append>
@@ -16,20 +20,25 @@
           </template>
         </q-input>
         <q-space/>
+        <q-btn :icon="$q.dark.isActive? 'light_mode': 'nights_stay'" dense
+               flat @click="$q.dark.toggle()"
+               :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
+        />
         <q-btn icon="notifications" dense flat push
-               style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
+               :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         >
           <q-badge color="transparent" floating>
             <q-icon name="mdi-alert-decagram" size="16px" color="red"></q-icon>
           </q-badge>
         </q-btn>
         <q-btn icon="message" dense
-               flat style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
+               flat
+               :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         />
         <q-btn-dropdown
           icon="person"
           dense flat
-          style="box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);"
+          :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         >
           <div class="row no-wrap q-pa-md">
             <div class="column">
@@ -108,12 +117,16 @@
     </q-drawer>
 
     <q-page-container>
-      <div class="column absolute-right shadow-10 bg-white fixed-right" style="height: 23%; top: 40%; z-index: 100">
-        <q-btn flat color="primary" icon="facebook"></q-btn>
-        <q-btn flat color="blue-6" icon="mdi-twitter"></q-btn>
-        <q-btn flat color="blue-10" to="https://www.linkedin.com/in/ezekielwachira" target="_blank" tag="a" icon="mdi-linkedin"></q-btn>
-        <q-toggle v-model="toggle" icon="mdi-brightness-4" icon-color="blue-grey-9" @toggle="this.$q.dark.isActive = !this.$q.dark.isActive"/>
-      </div>
+<!--      <div class="column absolute-right shadow-10 bg-white fixed-right"-->
+<!--           style="height: 23%; top: 40%; z-index: 100"-->
+<!--           :style="$q.dark.isActive? 'background-color: #ffffff': 'background-color: #37474f'"-->
+<!--      >-->
+<!--        <q-btn flat color="blue-8" icon="facebook"></q-btn>-->
+<!--        <q-btn flat @click="$q.dark.toggle()" color="blue-6" icon="mdi-twitter"></q-btn>-->
+<!--        <q-btn flat color="blue-10" to="https://www.linkedin.com/in/ezekielwachira" target="_blank" tag="a" icon="mdi-linkedin"></q-btn>-->
+<!--        <q-toggle v-model="toggle" icon="mdi-brightness-4" icon-color="blue-grey-9"-->
+<!--                  @toggle="$q.dark.toggle()"/>-->
+<!--      </div>-->
       <router-view />
     </q-page-container>
   </q-layout>
@@ -138,6 +151,13 @@ export default class MainLayout extends Vue {
   background: #37474f;
   box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
   color: #21BA45;
+}
+.dark-enabled-btn{
+  box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
+}
+.dark-disabled-btn{
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, .288);
+  color: #37474f;
 }
 .neumorphism-outer{
   background: red;

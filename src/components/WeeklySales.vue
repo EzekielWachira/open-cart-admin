@@ -2,7 +2,7 @@
     <q-card class="text-white" flat>
       <q-card-section>
 <!--        <apexchart width="280" type="donut" :options="options" :series="series"></apexchart>-->
-        <apexchart type="bar" height="250" :options="chartOptions" :series="series"></apexchart>
+        <apexchart type="bar" height="250" :options="chartOptions" :series="series" class="dark"></apexchart>
       </q-card-section>
     </q-card>
 </template>
@@ -21,6 +21,23 @@ export default class ClassComponent extends Vue {
   // readonly options: object | undefined
   private options: Object = {}
   // private series: number[] = [44, 55, 41, 17, 15]
+  private isDarkThemeActivated (): boolean {
+    if (this.$q.dark.isActive) {
+      console.log('dark ttgheme is activated')
+      return true
+    } else {
+      console.log('light themes activated')
+      return false
+    }
+  }
+
+  mounted () {
+    this.isDarkThemeActivated()
+  }
+
+  updated () {
+    this.isDarkThemeActivated()
+  }
 
   private series = [{
     name: 'Net Profit',
@@ -32,17 +49,19 @@ export default class ClassComponent extends Vue {
     name: 'Free Cash Flow',
     data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
   }]
-  private chartOptions: Object = {
+
+  private chartOptions = {
     chart: {
       type: 'bar',
-      height: 350
+      height: 350,
+      background: this.isDarkThemeActivated() ? '#37474f' : '#ffffff'
     },
     plotOptions: {
       bar: {
         horizontal: false,
         columnWidth: '55%',
         endingShape: 'rounded'
-      },
+      }
     },
     dataLabels: {
       enabled: false
@@ -53,7 +72,7 @@ export default class ClassComponent extends Vue {
       colors: ['transparent']
     },
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
     },
     yaxis: {
       title: {
@@ -66,15 +85,21 @@ export default class ClassComponent extends Vue {
     tooltip: {
       y: {
         formatter: function (val: any) {
-        return "$ " + val + " thousands"
+          return '$ ' + val + ' thousands'
+        }
+      }
+    },
+    theme: {
+      mode: this.isDarkThemeActivated() ? 'dark' : 'light',
+      palette: 'palette1',
+      monochrome: {
+        enabled: false,
+        color: '#255aee',
+        shadeTo: 'dark',
+        shadeIntensity: 0.65
       }
     }
   }
-}
-
-  mounted () {
-  }
-
 }
 </script>
 <style lang="scss" scoped>
