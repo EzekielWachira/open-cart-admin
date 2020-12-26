@@ -90,7 +90,7 @@ export default class ClassComponent extends Vue {
       }
     },
     theme: {
-      mode: this.isDarkThemeActivated() ? 'dark' : 'light',
+      mode: !this.isDarkThemeActivated() ? 'light' : 'dark',
       palette: 'palette1',
       monochrome: {
         enabled: false,

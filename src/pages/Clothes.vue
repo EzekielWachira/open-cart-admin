@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <div class="row q-gutter-y-xs">
         <div class="col-12 col-md-4 col-sm-6 q-gutter-y-xs q-px-xs"
-             v-for="(item, index) in productItems" :key="index">
-          <item :data="productItems[index]"/>
+             v-for="(item, index) in products" :key="index">
+          <item :data="products[index]" @click="logClick"/>
         </div>
     </div>
   </div>
@@ -13,14 +13,20 @@
 import { Vue, Component } from 'vue-property-decorator'
 import product from "src/utils/Products";
 import Item from "components/Item.vue";
+import { mapGetters, mapActions } from 'vuex'
+import {Action, Getter} from "vuex-class"
 
 @Component({
   components: {
     Item
+  },
+  computed: {
+    ...mapActions(['productModule/getAllProducts']),
+    ...mapActions(['productModule/getAllProducts'])
   }
 })
 export default class Clothes extends Vue {
-  private productItems: Array = product
+  private productItems = []
   private thumbStyle = {
     right: '4px',
     borderRadius: '5px',
@@ -35,6 +41,14 @@ export default class Clothes extends Vue {
     backgroundColor: '#027be3',
     width: '9px',
     opacity: 0.2
+  }
+
+  @Getter('productModule/allProducts') products: any
+  @Action('productModule/loggerClick') logClick: any
+  @Action('productModule/getAllProducts') getProducts: any
+  created () {
+    this.getProducts()
+    // this.productItems = this.$store.getters['productModule/allProducts']
   }
 }
 </script>

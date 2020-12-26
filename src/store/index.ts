@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state';
+import productModule from './module-products'
+import { ProductInterface } from './module-products/state'
 
 /*
  * If not building with SSR mode, you can
@@ -22,6 +24,7 @@ export default store(function ({ Vue }) {
   const Store = new Vuex.Store<StateInterface>({
     modules: {
       // example
+      productModule
     },
 
     // enable strict mode (adds overhead!)

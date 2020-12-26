@@ -134,8 +134,9 @@
 
 <script lang="ts">
 import EssentialLink from 'components/EssentialLink.vue'
-import { Vue, Component } from 'vue-property-decorator'
+import {Vue, Component, Emit} from 'vue-property-decorator'
 import links from 'src/utils/Links'
+import {Action} from "vuex-class";
 
 @Component({
   components: { EssentialLink }
@@ -144,6 +145,12 @@ export default class MainLayout extends Vue {
   leftDrawerOpen = false;
   essentialLinks = links;
   toggle = false
+
+  // @Action('productModule/toggleDarkMode', $q.dark.isActive) getDarkThemeStatus: any
+
+  // private configureAppTheme (): void {
+  //   this.$q.dark.toggle()
+  // }
 }
 </script>
 <style lang="scss" scoped>
