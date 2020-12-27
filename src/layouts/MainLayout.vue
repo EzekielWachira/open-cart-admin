@@ -21,7 +21,7 @@
         </q-input>
         <q-space/>
         <q-btn :icon="$q.dark.isActive? 'light_mode': 'nights_stay'" dense
-               flat @click="$q.dark.toggle()"
+               flat @click="configureAppTheme"
                :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         />
         <q-btn icon="notifications" dense flat push
@@ -134,9 +134,8 @@
 
 <script lang="ts">
 import EssentialLink from 'components/EssentialLink.vue'
-import {Vue, Component, Emit} from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import links from 'src/utils/Links'
-import {Action} from "vuex-class";
 
 @Component({
   components: { EssentialLink }
@@ -145,12 +144,21 @@ export default class MainLayout extends Vue {
   leftDrawerOpen = false;
   essentialLinks = links;
   toggle = false
+  private darkMode = false
+  private context = this
+
+  // private saveToLocalStorage (): void {
+  //   this.context.$q.dark.toggle()
+  //   localStorage.setItem('dark_mode', 'true')
+  // }
 
   // @Action('productModule/toggleDarkMode', $q.dark.isActive) getDarkThemeStatus: any
 
-  // private configureAppTheme (): void {
-  //   this.$q.dark.toggle()
-  // }
+  private configureAppTheme (): void {
+    this.context.$q.dark.toggle()
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    localStorage.setItem('dark_mode', String(this.context.$q.dark.isActive))
+  }
 }
 </script>
 <style lang="scss" scoped>
