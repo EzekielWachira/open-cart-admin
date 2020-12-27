@@ -8,6 +8,10 @@ const getters: GetterTree<ProductInterface, StateInterface> = {
   },
   darkThemeStatus (state: ProductInterface): boolean {
     return state.isDarkModeEnabled
+  },
+  getProduct (state: ProductInterface, index: number): ProductItemInterface {
+    console.log(state.allProducts[index])
+    return state.allProducts[index]
   }
 }
 

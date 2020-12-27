@@ -14,6 +14,7 @@
       <q-btn icon="mdi-pencil-outline" dense flat
         :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
              :style="$q.dark.isActive? 'color: #ffffff': 'color: #37474f'"
+             @click="getProductItem"
       />
       <q-btn icon="mdi-delete-outline" class="text-red" dense flat
         :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
@@ -23,17 +24,28 @@
 </template>
 
 <script lang="ts">
-import Component from "vue-class-component";
-import  { Vue, Prop } from "vue-property-decorator"
-import { Product } from "src/utils/Product";
+import Component from 'vue-class-component'
+import { Vue, Prop } from 'vue-property-decorator'
+import { Action, Getter, State } from 'vuex-class'
+// import { ProductItemInterface } from 'src/store/module-products/state'
 
 @Component
-export default class Item extends Vue{
+export default class Item extends Vue {
   @Prop({ default: {} }) readonly data!: Object
+  @Prop({ default: -1 }) readonly index!: number
+  @Action('productModule/getProduct') getProduct: any
+  @Getter('productModule/getProduct') product: any
+  @State('productModule/productItem') productItem: any
+
+  private getProductItem () {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+    this.getProduct(this.index)
+    this.$emit('ItemClicked', this.productItem)
+  }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .dark-enabled-btn{
   box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
 }

@@ -2,24 +2,26 @@ export interface ProductInterface {
   productItem: ProductItemInterface
   allProducts: Array<ProductItemInterface>
   isDarkModeEnabled: boolean
+  productIndex: number
 }
 
 export interface ProductItemInterface {
   name: string,
-  image: string,
   description: string,
+  image: string,
   price: number
 }
 
 const state: ProductInterface = {
   productItem: {
-    name: 'Example name',
-    image: 'Exampe image',
-    description: 'Example description',
-    price: 47.33
+    name: '',
+    description: '',
+    image: '',
+    price: 0
   },
   allProducts: [],
-  isDarkModeEnabled: false
+  isDarkModeEnabled: false,
+  productIndex: -1
 }
 
 export default state

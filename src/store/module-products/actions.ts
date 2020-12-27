@@ -1,6 +1,6 @@
 import { ActionTree } from 'vuex'
 import { StateInterface } from '../index'
-import { ProductInterface } from './state'
+import { ProductInterface, ProductItemInterface } from './state'
 import product from 'src/utils/Products'
 
 const actions: ActionTree<ProductInterface, StateInterface> = {
@@ -18,6 +18,14 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
 
   toggleDarkMode ({ commit }, value: boolean): void {
     commit('toggleDarkMode', value)
+  },
+
+  addProduct ({ commit }, item: ProductItemInterface) {
+    commit('addProduct', item)
+  },
+
+  getProduct ({ commit }, index: number) {
+    commit('getProduct', index)
   }
 }
 

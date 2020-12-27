@@ -7,6 +7,12 @@ const mutations: MutationTree<ProductInterface> = {
   },
   toggleDarkMode (state: ProductInterface, value: boolean) {
     state.isDarkModeEnabled = value
+  },
+  addProduct (state: ProductInterface, item: ProductItemInterface) {
+    state.allProducts.push(item)
+  },
+  getProduct (state: ProductInterface, index: number) {
+    state.productItem = state.allProducts[index]
   }
 }
 
