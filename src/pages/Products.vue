@@ -18,11 +18,11 @@
         active-color="positive"
       >
         <q-route-tab name="clothes" icon="mdi-tshirt-crew-outline" label="Clothes" to="/products/clothes"/>
-        <q-tab name="shoes" icon="mdi-shoe-cleat" label="Shoes"/>
-        <q-tab name="beauty" icon="mdi-face-shimmer-outline" label="Beauty" />
-        <q-tab name="electronics" icon="mdi-television" label="Electronics" />
-        <q-tab name="phones" icon="mdi-cellphone-android" label="Phones" />
-        <q-tab name="laptops_computers" icon="mdi-laptop" label="Laptops & Computers" />
+        <q-route-tab name="shoes" icon="mdi-shoe-cleat" label="Shoes" to="/products/shoes"/>
+        <q-route-tab name="beauty" icon="mdi-face-shimmer-outline" label="Beauty" to="/products/beauty"/>
+        <q-route-tab name="electronics" icon="mdi-television" label="Electronics" to="/products/electronics"/>
+        <q-route-tab name="phones" icon="mdi-cellphone-android" label="Phones" to="/products/phones"/>
+        <q-route-tab name="laptops_computers" icon="mdi-laptop" label="Laptops & Computers" to="/products/computers"/>
       </q-tabs>
       <div>
         <router-view />
