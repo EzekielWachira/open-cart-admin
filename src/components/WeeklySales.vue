@@ -12,31 +12,34 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import Chart from 'chart.js'
 import VueApexCharts from 'vue-apexcharts'
 import apexchart from 'vue-apexcharts'
+import {Getter} from "vuex-class";
 
 @Component({
   components: { apexchart, VueApexCharts }
 })
 export default class ClassComponent extends Vue {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  // readonly options: object | undefined
   private options: Object = {}
-  // private series: number[] = [44, 55, 41, 17, 15]
-  private isDarkThemeActivated (): boolean {
-    if (this.$q.dark.isActive) {
-      console.log('dark ttgheme is activated')
-      return true
+  private darkThemeStatus: boolean = false
+  private appTheme: string = ''
+  private chartBackground: string = ''
+
+  @Getter('appModule/darkModeStatus') darkModeStatus: any
+
+  private isDarkThemeActivated (){
+    if (this.darkThemeStatus) {
+      this.appTheme = 'dark'
+      this.chartBackground = '#37474f'
     } else {
-      console.log('light themes activated')
-      return false
+      this.appTheme = 'light'
+      this.chartBackground = '#ffffff'
     }
   }
 
-  mounted () {
+  created () {
+    this.darkThemeStatus = this.darkModeStatus
     this.isDarkThemeActivated()
-  }
-
-  updated () {
-    this.isDarkThemeActivated()
+    console.log('app theme status: ' + this.appTheme)
   }
 
   private series = [{
@@ -54,7 +57,7 @@ export default class ClassComponent extends Vue {
     chart: {
       type: 'bar',
       height: 350,
-      background: this.isDarkThemeActivated() ? '#37474f' : '#ffffff'
+      background: this.chartBackground
     },
     plotOptions: {
       bar: {
@@ -90,7 +93,7 @@ export default class ClassComponent extends Vue {
       }
     },
     theme: {
-      mode: !this.isDarkThemeActivated() ? 'light' : 'dark',
+      mode: this.appTheme,
       palette: 'palette1',
       monochrome: {
         enabled: false,
