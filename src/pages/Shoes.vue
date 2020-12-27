@@ -1,10 +1,10 @@
 <template>
   <div class="q-pa-md">
     <div class="row q-gutter-y-xs">
-        <div class="col-12 col-md-4 col-sm-6 q-gutter-y-xs q-px-xs"
-             v-for="(item, index) in products" :key="index">
-          <item :data="products[index]" @click="logClick" :index="index"/>
-        </div>
+      <div class="col-12 col-md-4 col-sm-6 q-gutter-y-xs q-px-xs"
+           v-for="(item, index) in products" :key="index">
+        <item :data="products[index]" @click="logClick" :index="index"/>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ import { Action, Getter } from 'vuex-class'
     ...mapActions(['productModule/getAllProducts'])
   }
 })
-export default class Clothes extends Vue {
+export default class Shoes extends Vue {
   private productItems = []
   private thumbStyle = {
     right: '4px',

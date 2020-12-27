@@ -10,7 +10,12 @@ const routes: RouteConfig[] = [
         path: '/products',
         component: () => import('pages/Products.vue'),
         children: [
-          { path: '/products/clothes', component: () => import('pages/Clothes.vue') }
+          { path: '/products/clothes', component: () => import('pages/Clothes.vue') },
+          { path: '/products/shoes', component: () => import('pages/Shoes.vue') },
+          { path: '/products/beauty', component: () => import('pages/Beauty.vue') },
+          { path: '/products/electronics', component: () => import('pages/Electronics.vue') },
+          { path: '/products/phones', component: () => import('pages/Phones.vue') },
+          { path: '/products/computers', component: () => import('pages/Computers.vue') }
         ]
       }
     ]

@@ -18,7 +18,7 @@
         active-color="positive"
       >
         <q-route-tab name="clothes" icon="mdi-tshirt-crew-outline" label="Clothes" to="/products/clothes"/>
-        <q-tab name="shoes" icon="mdi-shoe-cleat" label="Shoes" />
+        <q-tab name="shoes" icon="mdi-shoe-cleat" label="Shoes"/>
         <q-tab name="beauty" icon="mdi-face-shimmer-outline" label="Beauty" />
         <q-tab name="electronics" icon="mdi-television" label="Electronics" />
         <q-tab name="phones" icon="mdi-cellphone-android" label="Phones" />

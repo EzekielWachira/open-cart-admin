@@ -24,7 +24,7 @@ import { Action, Getter } from 'vuex-class'
     ...mapActions(['productModule/getAllProducts'])
   }
 })
-export default class Clothes extends Vue {
+export default class Beauty extends Vue {
   private productItems = []
   private thumbStyle = {
     right: '4px',
