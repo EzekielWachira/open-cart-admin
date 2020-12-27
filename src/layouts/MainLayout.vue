@@ -136,6 +136,7 @@
 import EssentialLink from 'components/EssentialLink.vue'
 import { Vue, Component } from 'vue-property-decorator'
 import links from 'src/utils/Links'
+import {Action} from "vuex-class";
 
 @Component({
   components: { EssentialLink }
@@ -147,15 +148,11 @@ export default class MainLayout extends Vue {
   private darkMode = false
   private context = this
 
-  // private saveToLocalStorage (): void {
-  //   this.context.$q.dark.toggle()
-  //   localStorage.setItem('dark_mode', 'true')
-  // }
-
-  // @Action('productModule/toggleDarkMode', $q.dark.isActive) getDarkThemeStatus: any
+  @Action('appModule/toggleDarkMode') toggleDarkMode: any
 
   private configureAppTheme (): void {
     this.context.$q.dark.toggle()
+    this.toggleDarkMode(this.context.$q.dark.isActive)
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     localStorage.setItem('dark_mode', String(this.context.$q.dark.isActive))
   }
