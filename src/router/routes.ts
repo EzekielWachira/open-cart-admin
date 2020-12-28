@@ -17,7 +17,8 @@ const routes: RouteConfig[] = [
           { path: '/products/phones', component: () => import('pages/Phones.vue') },
           { path: '/products/computers', component: () => import('pages/Computers.vue') }
         ]
-      }
+      },
+      { path: '/sales', component: () => import('pages/Sales.vue') }
     ]
   },
 
