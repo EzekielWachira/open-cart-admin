@@ -23,6 +23,9 @@
           <q-card-actions align="center">
             <q-btn color="positive" icon-right="login" label="Login"/>
           </q-card-actions>
+          <q-card-section class="q-pt-none text-center text-positive text-subtitle1 text-white">
+            Don't have an account? <strong class="text-bold text-positive cursor-pointer" @click="redirectToRegister">Register</strong>
+          </q-card-section>
         </q-card>
       </div>
     </q-page>
@@ -35,7 +38,11 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Login extends Vue {
+  private context = this
 
+  private redirectToRegister (): void {
+    this.$router.push('register')
+  }
 }
 
 </script>

@@ -23,7 +23,13 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/login',
-    component: () => import('layouts/Login.vue')
+    component: () => import('layouts/Login.vue'),
+    name: 'login'
+  },
+  {
+    path: '/register',
+    component: () => import('layouts/Register.vue'),
+    name: 'register'
   },
 
   // Always leave this as last one,
