@@ -37,8 +37,11 @@
           <q-card-actions align="center">
             <q-btn color="positive" icon-right="login" label="Register"/>
           </q-card-actions>
-          <q-card-section class="q-pt-none text-center text-positive text-subtitle1 text-white">
-            Already have an account <strong class="text-bold text-positive cursor-pointer" @click="redirectToLogin">Login</strong>
+          <q-card-section class="q-pt-none text-center text-positive text-subtitle1 text-white"
+                          :class="darkModeStatus ? 'text-white' : 'text-blue-grey-10'"
+          >
+            Already have an account <strong class="text-bold text-positive cursor-pointer"
+                                            @click="redirectToLogin">Login</strong>
           </q-card-section>
         </q-card>
       </div>
@@ -49,10 +52,13 @@
 <script lang="ts">
 
 import { Component, Vue } from "vue-property-decorator";
+import {Getter} from "vuex-class";
 
 @Component
 export default class Register extends Vue {
   private context = this
+
+  @Getter('appModule/darkModeStatus') darkModeStatus: any
 
   private redirectToLogin (): void{
     this.$router.push('login')
