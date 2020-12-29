@@ -21,6 +21,10 @@ const routes: RouteConfig[] = [
       { path: '/sales', component: () => import('pages/Sales.vue') }
     ]
   },
+  {
+    path: '/login',
+    component: () => import('layouts/Login.vue')
+  },
 
   // Always leave this as last one,
   // but you can also remove it
