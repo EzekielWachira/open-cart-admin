@@ -28,7 +28,7 @@ const links = [
   {
     title: 'Report',
     icon: 'mdi-file-chart',
-    linkTo: 'report'
+    linkTo: '/report'
   },
   {
     title: 'Manage Products',

@@ -19,7 +19,8 @@ const routes: RouteConfig[] = [
         ]
       },
       { path: '/sales', component: () => import('pages/Sales.vue') },
-      { path: '/settings', component: () => import('pages/Settings.vue') }
+      { path: '/settings', component: () => import('pages/Settings.vue') },
+      { path: '/customers', component: () => import('pages/Customers.vue') }
     ]
   },
   {

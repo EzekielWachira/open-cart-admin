@@ -25,6 +25,78 @@ const customers: Array<Customer> = [
     productsBought: 34,
     totalAmountPaid: 495,
     balance: 0,
+    deliveryStatus: 'done'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'done'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'done'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'pending'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'pending'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'done'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'pending'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
+    deliveryStatus: 'pending'
+  },
+  {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+    location: 'nairobi',
+    productsBought: 34,
+    totalAmountPaid: 495,
+    balance: 0,
     deliveryStatus: 'pending'
   },
   {
