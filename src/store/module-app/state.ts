@@ -1,9 +1,11 @@
 export interface AppInterface {
-  isDarkThemeEnabled: boolean
+  isDarkThemeEnabled: boolean,
+  isUserLoggedIn: boolean
 }
 
 const state: AppInterface = {
-  isDarkThemeEnabled: false
+  isDarkThemeEnabled: false,
+  isUserLoggedIn: false
 }
 
 export default state

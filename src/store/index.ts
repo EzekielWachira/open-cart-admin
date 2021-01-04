@@ -5,6 +5,7 @@ import Vuex from 'vuex'
 // import { ExampleStateInterface } from './module-example/state';
 import productModule from './module-products'
 import appModule from './module-app'
+import authModule from './module-auth'
 
 /*
  * If not building with SSR mode, you can
@@ -25,7 +26,8 @@ export default store(function ({ Vue }) {
     modules: {
       // example
       productModule,
-      appModule
+      appModule,
+      authModule
     },
 
     // enable strict mode (adds overhead!)
