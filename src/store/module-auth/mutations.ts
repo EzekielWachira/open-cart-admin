@@ -3,8 +3,8 @@ import { AuthInterface } from 'src/store/module-auth/state'
 import { UserData } from 'src/database/User'
 
 const mutations: MutationTree<AuthInterface> = {
-  login (state: AuthInterface, data: UserData) {
-    state.user = data
+  login (state: AuthInterface, token: string) {
+    state.accessToken = token
     state.isLoggedIn = true
   },
 

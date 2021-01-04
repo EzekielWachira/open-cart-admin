@@ -8,6 +8,7 @@ const actions: ActionTree<AuthInterface, StateInterface> = {
     const user = new User()
     await user.login(data).then(response => {
       commit('login', response.data)
+      localStorage.setItem('auth_token', response.data)
     })
   },
 
