@@ -1,19 +1,36 @@
 import { ActionTree } from 'vuex'
 import { StateInterface } from '../index'
 import { ProductInterface } from './state'
-import { ProductItem } from 'src/database/Product'
-import { Product } from "src/database/Product";
+import { ProductItem, Product } from 'src/database/Product'
 
 const actions: ActionTree<ProductInterface, StateInterface> = {
-  getAllProducts ({ commit }): void {
-    let allProducts: ProductItem[] = []
+  async getAllProducts ({ commit }) {
     const product = new Product()
-    product.getAllProducts().then(response => {
-        allProducts = response.data
-        commit('')
-      }
-    )
+    await product.getAllProducts().then(response => {
+      commit('getAllProducts', response.data)
+    })
   },
+
+  async addProduct ({ commit }, productItem: ProductItem) {
+    const product = new Product()
+    await product.addProduct(productItem).then(response => {
+      commit('addProduct', response.data)
+    })
+  },
+
+  async getProduct ({ commit }, index: number) {
+    const product = new Product()
+    await product.getProduct(index).then(response => {
+      commit('getProduct', response.data)
+    })
+  },
+
+  async deleteProduct ({ commit }, index: number) {
+    const product = new Product()
+    await product.deleteProduct(index).then(response => {
+      commit('deleteProduct', index)
+    })
+  }
 }
 
 export default actions

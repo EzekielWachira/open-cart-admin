@@ -7,8 +7,8 @@ const mutations: MutationTree<ProductInterface> = {
     state.allProducts = products
   },
 
-  getProduct (state: ProductInterface, index: number) {
-    state.productItem = state.allProducts[index]
+  getProduct (state: ProductInterface, productItem: ProductItem) {
+    state.productItem = productItem
   },
 
   addProduct (state: ProductInterface, item: ProductItem) {

@@ -26,12 +26,12 @@ export class Product {
     return Api().delete(`/product/${index}`)
   }
 
-  async getAllProducts (): Promise<AxiosPromise<ProductItem[]>> {
+  async getAllProducts () {
     await getCookie()
     return Api().get('/products')
   }
 
-  async getProduct (index: number): Promise<AxiosPromise<ProductItem>> {
+  async getProduct (index: number) {
     await getCookie()
     return Api().get(`/product/${index}`)
   }
