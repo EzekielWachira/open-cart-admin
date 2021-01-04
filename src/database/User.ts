@@ -5,6 +5,8 @@ export interface UserData {
   name?: string
   email: string
   password: string
+  // eslint-disable-next-line camelcase
+  password_confirmation?: string
 }
 
 export class User {
