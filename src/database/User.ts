@@ -22,4 +22,9 @@ export class User {
     await getCookie()
     return Api().post('/logout')
   }
+
+  public async getAuthUser () {
+    await getCookie()
+    return Api().get('/user')
+  }
 }

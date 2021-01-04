@@ -23,6 +23,13 @@ const actions: ActionTree<AuthInterface, StateInterface> = {
     await user.logout().then(response => {
       commit('logout', false)
     })
+  },
+
+  async getUser ({ commit }) {
+    const user = new User()
+    await user.getAuthUser().then(response => {
+      commit('getUser', response.data)
+    })
   }
 }
 

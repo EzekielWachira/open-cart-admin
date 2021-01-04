@@ -14,6 +14,10 @@ const mutations: MutationTree<AuthInterface> = {
 
   logout (state: AuthInterface, value: boolean) {
     state.isLoggedIn = value
+  },
+
+  getUser (state: AuthInterface, user: UserData) {
+    state.user = user
   }
 }
 

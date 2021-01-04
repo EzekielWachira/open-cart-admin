@@ -8,7 +8,7 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
   getAllProducts ({ commit }): void {
     let allProducts: ProductItem[] = []
     const product = new Product()
-    product.getAllProducts().then(response => () => {
+    product.getAllProducts().then(response => {
         allProducts = response.data
         commit('')
       }
