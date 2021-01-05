@@ -6,6 +6,7 @@ const BaseUrl = axios.create({
 const Api = () => {
   const token = localStorage.getItem('auth_token')
   if (token) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     BaseUrl.defaults.headers.common.authorization = `Bearer ${token}`
   }
   return BaseUrl

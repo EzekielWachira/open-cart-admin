@@ -6,6 +6,9 @@ import { UserData } from 'src/database/User'
 const getters: GetterTree<AuthInterface, StateInterface> = {
   getAuthenticatedUser (state: AuthInterface): UserData {
     return state.user
+  },
+  getToken (state: AuthInterface): string {
+    return state.accessToken
   }
 }
 

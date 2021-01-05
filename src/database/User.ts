@@ -12,7 +12,7 @@ export interface UserData {
 export class User {
   public async login (data: UserData) {
     await getCookie()
-    return Api().post('/api/login', data)
+    return Api().post('/login', data)
   }
 
   public async register (data: UserData) {
