@@ -9,6 +9,9 @@ const getters: GetterTree<AuthInterface, StateInterface> = {
   },
   getToken (state: AuthInterface): string {
     return state.accessToken
+  },
+  getLoginStatus (state: AuthInterface): boolean {
+    return state.isLoggedIn
   }
 }
 

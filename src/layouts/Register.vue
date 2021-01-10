@@ -64,9 +64,9 @@
 
 <script lang="ts">
 
-import { Component, Vue } from "vue-property-decorator";
-import {Action, Getter} from "vuex-class";
-import {UserData} from "src/database/User";
+import { Component, Vue } from 'vue-property-decorator'
+import { Action, Getter } from 'vuex-class'
+import { UserData } from 'src/database/User'
 
 @Component
 export default class Register extends Vue {
@@ -85,8 +85,10 @@ export default class Register extends Vue {
     this.$router.push('login')
   }
 
-  private registerUser (data: UserData){
+  private registerUser (data: UserData) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.register(data)
+    this.redirectToLogin()
   }
 }
 

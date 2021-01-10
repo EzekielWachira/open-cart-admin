@@ -43,9 +43,9 @@
 
 <script lang="ts">
 
-import { Component, Vue } from "vue-property-decorator";
-import {Action, Getter} from "vuex-class";
-import {UserData} from "src/database/User";
+import { Component, Vue } from 'vue-property-decorator'
+import { Action, Getter } from 'vuex-class'
+import { UserData } from 'src/database/User'
 
 @Component
 export default class Login extends Vue {
@@ -63,9 +63,10 @@ export default class Login extends Vue {
   }
 
   private loginUser (data: UserData) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.login(data)
+    this.$router.push('dashboard')
   }
-
 }
 
 </script>
