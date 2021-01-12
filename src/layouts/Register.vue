@@ -68,7 +68,14 @@ import { Component, Vue } from 'vue-property-decorator'
 import { Action, Getter } from 'vuex-class'
 import { UserData } from 'src/database/User'
 
-@Component
+@Component({
+  meta () {
+    return {
+      title: 'register',
+      titleTemplate: (title: string) => `opencartadmin | ${title}`
+    }
+  }
+})
 export default class Register extends Vue {
   private context = this
   private userData = {

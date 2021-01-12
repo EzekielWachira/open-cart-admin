@@ -54,7 +54,7 @@
                 <img src="https://cdn.quasar.dev/img/boy-avatar.png">
               </q-avatar>
 
-              <div class="text-subtitle1 q-mt-md q-mb-xs">John Doe</div>
+              <div class="text-subtitle1 q-mt-md q-mb-xs">{{ authUser.name }}</div>
 
               <q-btn
                 color="primary"
@@ -136,7 +136,7 @@
 import EssentialLink from 'components/EssentialLink.vue'
 import { Vue, Component } from 'vue-property-decorator'
 import links from 'src/utils/Links'
-import {Action} from "vuex-class";
+import { Action, Getter } from 'vuex-class'
 
 @Component({
   components: { EssentialLink }
@@ -147,14 +147,20 @@ export default class MainLayout extends Vue {
   toggle = false
   private darkMode = false
   private context = this
+  private user = {}
 
   @Action('appModule/toggleDarkMode') toggleDarkMode: any
+  @Getter('authModule/getAuthenticatedUser') authUser: any
 
   private configureAppTheme (): void {
     this.context.$q.dark.toggle()
     this.toggleDarkMode(this.context.$q.dark.isActive)
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     localStorage.setItem('dark_mode', String(this.context.$q.dark.isActive))
+  }
+
+  created () {
+    this.authUser = this.user
   }
 }
 </script>

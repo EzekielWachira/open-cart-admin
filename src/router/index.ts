@@ -27,23 +27,26 @@ export default route<Store<StateInterface>>(function ({ Vue }) {
 
   // @Getter('authModule/getLoginStatus') getLoginStatus: any
 
-  Router.beforeEach((to, from, next) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (!authModule.getters['authModule/getLoginStatus']) {
-        next({
-          path: '/login',
-          query: { redirect: to.fullPath }
-        })
-      } else {
-        next()
-      }
-    } else {
-      next()
-    }
-  })
+  // Router.beforeEach((to, from, next) => {
+  //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  //   if (to.matched.some(record => record.meta.requiresAuth)) {
+  //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //     // @ts-ignore
+  //     if (!authModule.getters['authModule/getLoginStatus']) {
+  //       next({
+  //         path: '/login',
+  //         query: { redirect: to.fullPath }
+  //       })
+  //     } else {
+  //       next({
+  //         path: '/products',
+  //         query: { redirect: to.fullPath }
+  //       })
+  //     }
+  //   } else {
+  //     next()
+  //   }
+  // })
 
   return Router
 })
