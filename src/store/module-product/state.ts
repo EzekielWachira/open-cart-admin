@@ -1,8 +1,10 @@
 import { ProductItem } from 'src/database/Product'
+import { CategoryData } from 'src/database/Category'
 
 export interface ProductInterface {
   productItem: ProductItem
   allProducts: Array<ProductItem>
+  categories: Array<CategoryData>
 }
 
 const state: ProductInterface = {
@@ -12,7 +14,8 @@ const state: ProductInterface = {
     description: '',
     price: 0
   },
-  allProducts: []
+  allProducts: [],
+  categories: []
 }
 
 export default state

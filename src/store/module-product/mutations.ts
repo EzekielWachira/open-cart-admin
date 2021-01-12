@@ -1,6 +1,7 @@
 import { MutationTree } from 'vuex'
 import { ProductInterface } from './state'
 import { ProductItem } from 'src/database/Product'
+import { CategoryData } from 'src/database/Category'
 
 const mutations: MutationTree<ProductInterface> = {
   getAllProducts (state: ProductInterface, products: ProductItem[]) {
@@ -17,7 +18,23 @@ const mutations: MutationTree<ProductInterface> = {
 
   deleteProduct (state: ProductInterface, index: number) {
     state.allProducts.splice(index, 1)
+  },
+
+  addCategory (state: ProductInterface, category: CategoryData) {
+    state.categories.push(category)
+  },
+
+  deleteCategory (state: ProductInterface, index: number) {
+    state.categories.splice(index, 1)
+  },
+
+  getAllCategories (state: ProductInterface, categoryData: Array<CategoryData>) {
+    state.categories = categoryData
   }
+  //
+  // editCategory (state: ProductInterface, id: number) {
+  //
+  // }
 
   // updateProduct (state: ProductInterface, index: number) {
   //

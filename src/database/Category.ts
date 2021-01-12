@@ -17,6 +17,12 @@ export class Category {
   }
 
   public async deleteCategory (id: number) {
+    await getCookie()
     return Api().delete(`/category/${id}`)
+  }
+
+  public async getAllCategories () {
+    await getCookie()
+    return Api().get('/categories')
   }
 }
