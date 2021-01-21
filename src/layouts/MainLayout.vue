@@ -151,6 +151,8 @@ export default class MainLayout extends Vue {
 
   @Action('appModule/toggleDarkMode') toggleDarkMode: any
   @Getter('authModule/getAuthenticatedUser') authUser: any
+  @Action('authModule/getToken') getToken: any
+  @Action('productModule/getAllCategories') getCategories: any
 
   private configureAppTheme (): void {
     this.context.$q.dark.toggle()
@@ -160,6 +162,8 @@ export default class MainLayout extends Vue {
   }
 
   created () {
+    this.getToken()
+    this.getCategories()
     this.authUser = this.user
   }
 }

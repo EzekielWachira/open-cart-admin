@@ -47,14 +47,15 @@
                      />
           </q-card-section>
           <q-card-section class="q-pt-none">
-            <q-file label="Product Image" outlined dense value="">
+            <q-file label="Product Image" outlined dense value="" v-model="product.image">
               <template v-slot:prepend>
                 <q-icon name="image"/>
               </template>
             </q-file>
           </q-card-section>
           <q-card-section class="q-pt-none">
-            <q-select :options="options" label="Category" dense outlined value="">
+            <q-select :options="options" label="Category" dense outlined value="" v-model="categoryName"
+            >
               <template v-slot:prepend>
                 <q-icon name="mdi-shape-outline" />
               </template>
@@ -91,6 +92,7 @@
           <q-card-section class="q-pt-none">
             <q-input dense color="positive"
                      placeholder="Category name" outlined
+                     v-model="categoryData.name"
                      autofocus @keyup.enter="newCategory = false" />
           </q-card-section>
 
@@ -98,11 +100,13 @@
             <q-btn flat label="Cancel"
                    color="red"
                    :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
-                   v-close-popup />
+                   v-close-popup
+                    />
             <q-btn flat label="Add Category"
                    color="positive"
                    :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
-                   v-close-popup />
+                   @click="saveCategory"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -115,38 +119,88 @@ import Component from 'vue-class-component'
 import { Vue } from 'vue-property-decorator'
 import { ProductItemInterface } from 'src/store/module-products/state'
 import {Action, Getter} from 'vuex-class'
+import {CategoryData} from "src/database/Category"
+import Api from 'src/database/Api'
+import { Category } from "src/database/Category"
+
+const category = {
+  name: ''
+}
 
 @Component
 export default class Products extends Vue {
   private tab = 'clothes'
   private newProductPrompt = false
   private newCategoryPrompt = false
-  private options = ['Clothes', 'Shoes', 'Electronics', 'Laptops & Computers']
+  private options: string[] = []
   private product = {
     name: '',
     description: '',
-    image: '../images/nike.png',
+    image: '',
+    category_id: 2,
     price: 99.99
   }
+  private categoryData: string = ""
+  private categoryName: string = ""
 
   @Action('productModule/addProduct') addProduct: any
   @Getter('productModule/getProduct') getProduct: any
+  @Action('productModule/addCategory') addCategory:any
+  @Getter('productModule/getAllCategories') allCategories: any
+  @Action('productModule/getAllCategories') getCategories: any
+
+  private saveCategory () {
+    console.log("data: " + this.categoryData)
+    // this.addCategory(data)
+    // this.categoryData.name = ''
+  }
+
+  private getCategoryId () {
+    console.log("name is:" + this.categoryName)
+    const category = new Category()
+    let id = 0
+    category.getCategory(this.categoryName).then(response => {
+      id = response.data.id
+      console.log(response.data)
+    })
+    return id
+  }
 
   private addProductItem () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.addProduct(this.product)
+    console.log(this.product)
     this.product = {
       name: '',
       description: '',
-      image: '../images/nike.png',
+      image: '',
+      category_id: 0,
       price: 0
     }
   }
 
   created () {
-    this.$on('ItemClicked', (item: ProductItemInterface) => {
-      console.log(item)
+    // this.$on('ItemClicked', (item: ProductItemInterface) => {
+    //   console.log(item)
+    // })
+    this.getCategories()
+    // this.categoryData = this.allCategories
+    // for (let i = 0; i < this.categoryData.length; i++){
+    //   console.log(this.categoryData[i])
+    // }
+    this.allCategories.forEach((data: CategoryData) => {
+      console.log(data)
+      this.options.push(data.name)
+      console.log(this.options)
     })
+
+    // this.allCategories.forEach((category: CategoryData) => {
+    //   this.options.push(category.name)
+    // })
+    // console.log(this.allCategories.name)
+  }
+
+  mounted () {
   }
 }
 </script>

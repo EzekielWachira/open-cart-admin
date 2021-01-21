@@ -22,6 +22,10 @@ const mutations: MutationTree<AuthInterface> = {
 
   getToken (state: AuthInterface, token: string) {
     state.accessToken = token
+  },
+
+  setToken (state: AuthInterface, token: string) {
+    state.accessToken = token
   }
 }
 

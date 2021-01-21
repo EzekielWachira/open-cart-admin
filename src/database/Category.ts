@@ -8,6 +8,7 @@ export interface CategoryData {
 export class Category {
   public async addCategory (data: CategoryData) {
     await getCookie()
+    console.log(data)
     return Api().post('/category', data)
   }
 
@@ -24,5 +25,10 @@ export class Category {
   public async getAllCategories () {
     await getCookie()
     return Api().get('/categories')
+  }
+
+  public async getCategory (name: string) {
+    await getCookie()
+    return Api().get(`/category/${name}`)
   }
 }

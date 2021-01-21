@@ -3,6 +3,7 @@ import { StateInterface } from '../index'
 import { ProductInterface } from './state'
 import { ProductItem, Product } from 'src/database/Product'
 import { Category, CategoryData } from 'src/database/Category'
+import Api from 'src/database/Api'
 
 const actions: ActionTree<ProductInterface, StateInterface> = {
   async getAllProducts ({ commit }) {
@@ -35,9 +36,11 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
 
   async addCategory ({ commit }, data: CategoryData) {
     const category = new Category()
-    await category.addCategory(data).then(response => {
-      commit('addCategory', data)
-    })
+    // await category.addCategory(data).then(() => {
+    //   // console.log(response.data)
+    //   commit('addCategory', data)
+    // })
+    await Api().post('/category', data)
   },
 
   async deleteCategory ({ commit }, index: number) {
@@ -50,7 +53,7 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
   async getAllCategories ({ commit }) {
     const category = new Category()
     await category.getAllCategories().then(response => {
-      commit('getAllCategories', response.data)
+      commit('getAllCategories', response.data.data)
     })
   }
 }
