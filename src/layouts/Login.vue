@@ -43,11 +43,18 @@
 
 <script lang="ts">
 
-import { Component, Vue } from "vue-property-decorator";
-import {Action, Getter} from "vuex-class";
-import {UserData} from "src/database/User";
+import { Component, Vue } from 'vue-property-decorator'
+import { Action, Getter } from 'vuex-class'
+import { UserData } from 'src/database/User'
 
-@Component
+@Component({
+  meta () {
+    return {
+      title: 'login',
+      titleTemplate: (title: string) => `opencartadmin | ${title}`
+    }
+  }
+})
 export default class Login extends Vue {
   private context = this
   private userData = {
@@ -57,19 +64,25 @@ export default class Login extends Vue {
 
   @Getter('appModule/darkModeStatus') darkModeStatus: any
   @Action('authModule/login') login: any
+  @Action('authModule/getUser') getAuthUser: any
 
-  private redirectToRegister (): void {
-    this.$router.push('register')
+  private async redirectToRegister () {
+    await this.$router.push('register')
   }
 
-  private loginUser (data: UserData) {
+  private async loginUser (data: UserData) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.login(data)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    this.getAuthUser()
+    await this.$router.push('/')
   }
-
 }
 
 </script>
 
 <style scoped>
-
+.hello{
+  color: red;
+}
 </style>

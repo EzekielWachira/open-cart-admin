@@ -2,6 +2,7 @@ import { ActionTree } from 'vuex'
 import { StateInterface } from 'src/store'
 import { AuthInterface } from 'src/store/module-auth/state'
 import { User, UserData } from 'src/database/User'
+import VueRouter from 'vue-router'
 
 const actions: ActionTree<AuthInterface, StateInterface> = {
   async login ({ commit }, data: UserData) {
@@ -9,6 +10,9 @@ const actions: ActionTree<AuthInterface, StateInterface> = {
     await user.login(data).then(response => {
       commit('login', response.data)
       localStorage.setItem('auth_token', response.data)
+      // window.self.location.replace('/products')
+      // eslint-disable-next-line no-void
+      // new VueRouter().push('/')
     })
   },
 

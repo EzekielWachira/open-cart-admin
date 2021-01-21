@@ -10,7 +10,7 @@
             </q-avatar>
           </q-item-section>
           <q-item-section>
-            Signed in as <strong class="text-positive">ezekielwachira@gmail.com</strong>
+            Signed in as <strong class="text-positive">{{ authUser.email }}</strong>
           </q-item-section>
           <q-item-section side class="text-positive">
             Sign in with a different account <q-icon name="mdi-open-in-new" />
@@ -60,13 +60,16 @@
 
 <script lang="ts">
 
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
 
 @Component
 export default class Settings extends Vue {
   private darkTheme = true
   private allowBackUp = true
   private showNotification = false
+
+  @Getter('authModule/getAuthenticatedUser') authUser: any
 }
 
 </script>
