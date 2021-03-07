@@ -35,11 +35,8 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
   },
 
   async addCategory ({ commit }, data: CategoryData) {
-    const category = new Category()
-    // await category.addCategory(data).then(() => {
-    //   // console.log(response.data)
-    //   commit('addCategory', data)
-    // })
+    // const category = new Category()
+    console.log(data)
     await Api().post('/category', data)
   },
 

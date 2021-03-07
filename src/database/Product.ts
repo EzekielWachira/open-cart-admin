@@ -2,8 +2,9 @@ import Api from './Api'
 import getCookie from './Csrf'
 import { AxiosPromise } from 'axios'
 export interface ProductItem {
+  category_id?: number,
   name: string
-  image: string
+  image: File
   description: string
   price: number
 }
@@ -20,6 +21,7 @@ export class Product {
     await getCookie()
     return Api().post('/product', product)
   }
+  // 127.0.0.1:8000/api/product/category/Clothes
 
   async deleteProduct (index: number) {
     await getCookie()
