@@ -2,8 +2,8 @@
   <div class="q-pa-md">
     <div class="row q-gutter-y-xs">
         <div class="col-12 col-md-4 col-sm-6 q-gutter-y-xs q-px-xs"
-             v-for="(item, index) in products" :key="index">
-          <item :data="products[index]" @click="logClick" :index="index"/>
+             v-for="(item, index) in clothes" :key="index">
+          <item :data="clothes[index]" @click="logClick" :index="index"/>
         </div>
     </div>
   </div>
@@ -14,6 +14,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import Item from 'components/Item.vue'
 import { mapGetters, mapActions } from 'vuex'
 import { Action, Getter } from 'vuex-class'
+import {ProductItem} from "src/database/Product";
 
 @Component({
   components: {
@@ -37,6 +38,7 @@ export default class Clothes extends Vue {
     width: '9px',
     opacity: 0.2
   }
+  private clothes : Array<ProductItem> = []
 
   @Getter('productModule/getAllProducts') products: any
   @Action('productsModule/loggerClick') logClick: any
@@ -47,12 +49,16 @@ export default class Clothes extends Vue {
     // this.productItems = this.$store.getters['productModule/allProducts']
   }
 
-  private logProducts() {
-    console.log(this.products)
+  private filterProducts () : void {
+    this.clothes = this.products.filter((product: ProductItem) => {
+      return product.category_id === 2
+    })
   }
 
   private mounted () {
     this.getProducts()
+    this.filterProducts()
+    console.log(`Clothes: =>>>> ${this.clothes}`)
   }
 }
 </script>

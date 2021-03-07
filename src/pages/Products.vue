@@ -4,6 +4,10 @@
       <q-toolbar>
         <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
+        <q-btn icon="mdi-refresh-circle" class="text-white q-mr-sm" round dense
+               @click="refreshCategories"
+               :loading="refreshLoading"
+               style="background: #37474f" />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category"
                @click="newCategoryPrompt = true"
                style="background: #37474f" />
@@ -29,8 +33,13 @@
       </div>
       <q-dialog v-model="newProductPrompt" persistent>
         <q-card style="min-width: 350px; width: 450px">
-          <q-card-section>
+          <q-card-section class="row">
             <div class="text-h6">New Product</div>
+            <q-space />
+            <q-btn icon="mdi-refresh-circle" class="text-white q-mr-sm"  dense flat
+                   @click="refreshCategories"
+                   :loading="refreshLoading"
+                   style="background: #37474f" />
           </q-card-section>
 
           <q-card-section class="q-pt-none">
@@ -137,6 +146,8 @@ import {Action, Getter} from 'vuex-class'
 import {CategoryData} from "src/database/Category"
 import Api from 'src/database/Api'
 import { Category } from "src/database/Category"
+import { Notification } from "src/utils/Utilities";
+import showNotification from "src/utils/Utilities";
 
 @Component
 export default class Products extends Vue {
@@ -155,6 +166,8 @@ export default class Products extends Vue {
   private categoryName: string = ""
   private image: any = ""
   private previewImage: any = ""
+  private refreshLoading: boolean = false
+  private loadingPercentage: number = 0
 
   @Action('productModule/addProduct') addProduct: any
   @Getter('productModule/getProduct') getProduct: any
@@ -185,6 +198,14 @@ export default class Products extends Vue {
     this.getCategories()
     this.newCategoryPrompt = false
     this.getCategories()
+
+    this.showNotification(
+      {
+        message: 'Category added successfully',
+        type: 'positive',
+        color: 'positive',
+        icon: 'mdi-check-circle'}
+    )
     // this.clear()
   }
 
@@ -201,6 +222,17 @@ export default class Products extends Vue {
       this.product.category_id = response.data.data.id
   }
 
+  private showNotification (this: any, notification : Notification) {
+    this.$q.notify({
+      message: notification.message,
+      color: notification.color,
+      icon: notification.icon,
+      multiLine: notification.multiline,
+      avatar: notification.avatar,
+      actions: notification.action
+    })
+  }
+
   private addProductItem () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     let formData = new FormData()
@@ -215,6 +247,16 @@ export default class Products extends Vue {
     console.log(`Form data ${formData}`)
     this.addProduct(formData)
     this.$emit('ProductAdded')
+
+    this.showNotification(
+      {
+        message: 'Product added successfully',
+        type: 'positive',
+        color: 'positive',
+        icon: 'mdi-check-circle'
+      }
+    )
+
     this.product = {
       name: '',
       description: '',
@@ -225,8 +267,22 @@ export default class Products extends Vue {
     this.previewImage = ""
   }
 
-  private refreshCategories () : void {
+  private startLoading () : void {
+    this.refreshLoading = true
+    this.getCategories()
+    this.options = []
+    this.allCategories.forEach((data: CategoryData) => {
+      this.options.push(data.name)
+    })
+    setTimeout(() => {
+      this.refreshLoading = false
+      console.log(this.allCategories)
+    }, 2000)
+  }
 
+  private refreshCategories () : void {
+    this.startLoading()
+    // this.getCategories()
   }
 
   created () {
