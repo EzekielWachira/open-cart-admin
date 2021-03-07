@@ -179,30 +179,12 @@ export default class Products extends Vue {
     }
   }
 
-  private handleFileChange (e: any) {
-    this.product.image = e.target.files[0]
-    console.log(e.target.files[0])
-    console.log("Product image: " + this.product.image)
-    // if (!e.target.files.length) return
-    // let file = e.target.files[0]
-    // console.log("HELLLLO" + e.target.files[0])
-    // let reader = new FileReader()
-    // reader.readAsDataURL(file)
-    // reader.onload = e => {
-    //   let src = e.target.result
-    //   console.log(src)
-    // }
-  }
-
-  private logToConsole () {
-    console.log(this.product.image)
-  }
-
   private saveCategory () : void{
     console.log(this.category)
     this.addCategory(this.category)
     this.getCategories()
     this.newCategoryPrompt = false
+    this.getCategories()
     // this.clear()
   }
 
@@ -225,12 +207,14 @@ export default class Products extends Vue {
     formData.append("name", this.product.name)
     formData.append("description", this.product.description)
     if (this.product.image !== null){
+      //@ts-ignore
       formData.append("image", this.product.image)
     }
     formData.append("category_id", this.product.category_id.toString())
     formData.append("price", this.product.price.toString())
     console.log(`Form data ${formData}`)
     this.addProduct(formData)
+    this.$emit('ProductAdded')
     this.product = {
       name: '',
       description: '',
@@ -239,6 +223,10 @@ export default class Products extends Vue {
       price: 0
     }
     this.previewImage = ""
+  }
+
+  private refreshCategories () : void {
+
   }
 
   created () {
@@ -251,7 +239,9 @@ export default class Products extends Vue {
 
   }
 
+
   mounted () {
+    this.getCategories()
   }
 }
 </script>

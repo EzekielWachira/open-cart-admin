@@ -19,10 +19,6 @@ import { Action, Getter } from 'vuex-class'
   components: {
     Item
   },
-  computed: {
-    ...mapActions(['productModule/getAllProducts']),
-    ...mapActions(['productModule/getAllProducts'])
-  }
 })
 export default class Phones extends Vue {
   private productItems = []
@@ -42,7 +38,7 @@ export default class Phones extends Vue {
     opacity: 0.2
   }
 
-  @Getter('productModule/allProducts') products: any
+  @Getter('productModule/getAllProducts') products: any
   @Action('productModule/loggerClick') logClick: any
   @Action('productModule/getAllProducts') getProducts: any
   created () {

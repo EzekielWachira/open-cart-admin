@@ -20,7 +20,7 @@
           </template>
         </q-input>
         <q-space/>
-        <q-btn :icon="$q.dark.isActive? 'light_mode': 'nights_stay'" dense
+        <q-btn :icon="$q.dark.isActive? 'nights_stay': 'light_mode'" dense
                flat @click="configureAppTheme"
                :class="$q.dark.isActive? 'dark-enabled-btn': 'dark-disabled-btn'"
         />

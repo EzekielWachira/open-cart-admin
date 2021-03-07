@@ -10,7 +10,8 @@ export interface ProductInterface {
 const state: ProductInterface = {
   productItem: {
     name: '',
-    image: '',
+// @ts-ignore
+    image: null,
     description: '',
     price: 0
   },

@@ -18,10 +18,6 @@ import { Action, Getter } from 'vuex-class'
 @Component({
   components: {
     Item
-  },
-  computed: {
-    ...mapActions(['productModule/getAllProducts']),
-    ...mapActions(['productModule/getAllProducts'])
   }
 })
 export default class Beauty extends Vue {
@@ -42,8 +38,8 @@ export default class Beauty extends Vue {
     opacity: 0.2
   }
 
-  @Getter('productModule/allProducts') products: any
-  @Action('productModule/loggerClick') logClick: any
+  @Getter('productModule/getAllProducts') products: any
+  @Action('productsModule/loggerClick') logClick: any
   @Action('productModule/getAllProducts') getProducts: any
   created () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call

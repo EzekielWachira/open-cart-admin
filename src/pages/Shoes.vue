@@ -18,10 +18,6 @@ import { Action, Getter } from 'vuex-class'
 @Component({
   components: {
     Item
-  },
-  computed: {
-    ...mapActions(['productModule/getAllProducts']),
-    ...mapActions(['productModule/getAllProducts'])
   }
 })
 export default class Shoes extends Vue {
@@ -42,13 +38,20 @@ export default class Shoes extends Vue {
     opacity: 0.2
   }
 
-  @Getter('productModule/allProducts') products: any
+  @Getter('productModule/getAllProducts') products: any
   @Action('productModule/loggerClick') logClick: any
   @Action('productModule/getAllProducts') getProducts: any
+
   created () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.getProducts()
     // this.productItems = this.$store.getters['productModule/allProducts']
+  }
+  
+  private mounted () {
+    this.$on('ProductAdded', () => {
+      this.getProducts()
+    })
   }
 }
 </script>

@@ -9,7 +9,7 @@ const actions: ActionTree<ProductInterface, StateInterface> = {
   async getAllProducts ({ commit }) {
     const product = new Product()
     await product.getAllProducts().then(response => {
-      commit('getAllProducts', response.data)
+      commit('getAllProducts', response.data.data)
     })
   },
 
