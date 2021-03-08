@@ -5,10 +5,11 @@
         <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
         <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
-               @click="displayAlter" color="positive"
+               @click="loadRefresh" color="positive"
+               :loading="isDataRefreshed"
                style="background: #37474f" />
-        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
-               @click="refreshCategories" color="positive"
+        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm"  dense
+               @click="refreshCategories"
                :loading="refreshLoading"
                style="background: #37474f" />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category"
@@ -171,15 +172,16 @@ export default class Products extends Vue {
   private previewImage: any = ""
   private refreshLoading: boolean = false
   private loadingPercentage: number = 0
+  private isDataRefreshed : boolean = false
 
   @Action('productModule/addProduct') addProduct: any
   @Getter('productModule/getProduct') getProduct: any
   @Action('productModule/addCategory') addCategory:any
   @Getter('productModule/getAllCategories') allCategories: any
-  @Action('productModule/getAllCategories') getCategories: any
+  @Action('productModule/getAllCategories') getCategories: an
 
-  displayAlter () {
-    this.$emit('itemClicked', "Apollo")
+  private loadRefresh () : void{
+    this.$root.$emit('refreshClicked')
   }
 
   private selectImage(event: any) : void {
@@ -253,7 +255,6 @@ export default class Products extends Vue {
     formData.append("price", this.product.price.toString())
     console.log(`Form data ${formData}`)
     this.addProduct(formData)
-    this.$emit('ProductAdded')
 
     this.showNotification(
       {
@@ -263,6 +264,8 @@ export default class Products extends Vue {
         icon: 'mdi-check-circle'
       }
     )
+
+    this.loadRefresh()
 
     this.product = {
       name: '',
@@ -276,13 +279,16 @@ export default class Products extends Vue {
 
   private startLoading () : void {
     this.refreshLoading = true
+    this.isDataRefreshed = true
     this.getCategories()
+    this.loadRefresh()
     this.options = []
     this.allCategories.forEach((data: CategoryData) => {
       this.options.push(data.name)
     })
     setTimeout(() => {
       this.refreshLoading = false
+      this.isDataRefreshed = false
       console.log(this.allCategories)
     }, 2000)
   }
