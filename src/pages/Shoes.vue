@@ -1,9 +1,15 @@
 <template>
   <div class="q-pa-md">
-    <div class="row q-gutter-y-xs">
+    <div class="row q-gutter-y-xs" v-if="shoes.length > 0">
       <div class="col-12 col-md-4 col-sm-6 q-gutter-y-xs q-px-xs"
            v-for="(item, index) in shoes" :key="index">
         <item :data="shoes[index]" @click="logClick" :index="index"/>
+      </div>
+    </div>
+    <div v-else class="">
+      <div class="fixed-center text-center">
+        <q-icon name="mdi-database-off-outline" class="text-yellow-13" size="70px"></q-icon>
+        <div class=" text-yellow-13 text-h5"> No Items Available</div>
       </div>
     </div>
   </div>
@@ -32,21 +38,27 @@ export default class Shoes extends Vue {
 
   private async filterProducts () {
     this.shoes = await this.products.filter((shoe: ProductItem) => {
-      return shoe.category_id === 1
+      return shoe.category_id === 2
     })
   }
 
   created () {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     this.getProducts()
-    this.$on('ProductAdded', () => {
-      this.getProducts()
+    this.$on('itemClicked', (value: string) => {
+      console.log(value)
     })
   }
 
+  private beforeMount() {
+    this.filterProducts()
+  }
 
   private mounted () {
+    this.$on('itemClicked', (value) => {
+      alert(value)
+    })
     this.filterProducts()
+    console.log(this.shoes)
   }
 }
 </script>

@@ -4,8 +4,11 @@
       <q-toolbar>
         <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
-        <q-btn icon="mdi-refresh-circle" class="text-white q-mr-sm" round dense
-               @click="refreshCategories"
+        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
+               @click="displayAlter" color="positive"
+               style="background: #37474f" />
+        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
+               @click="refreshCategories" color="positive"
                :loading="refreshLoading"
                style="background: #37474f" />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category"
@@ -70,7 +73,7 @@
 <!--              </q-file>-->
 <!--          </q-card-section>-->
           <q-card-section>
-            <q-input type="file" @change="selectImage" @select="selectImage" outlined />
+            <q-input type="file" @change="selectImage" @select="selectImage" outlined accept="image/*" />
           </q-card-section>
           <q-card-section v-if="previewImage !== ''">
 <!--            <img :src="image">-->
@@ -174,6 +177,10 @@ export default class Products extends Vue {
   @Action('productModule/addCategory') addCategory:any
   @Getter('productModule/getAllCategories') allCategories: any
   @Action('productModule/getAllCategories') getCategories: any
+
+  displayAlter () {
+    this.$emit('itemClicked', "Apollo")
+  }
 
   private selectImage(event: any) : void {
     console.log(event.target.files)

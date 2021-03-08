@@ -1,12 +1,14 @@
 import Api from './Api'
 import getCookie from './Csrf'
 import { AxiosPromise } from 'axios'
+import {CategoryData} from "src/database/Category";
 export interface ProductItem {
   category_id?: number,
   name: string
   image: File
   description: string
-  price: number
+  price: number,
+  category?: CategoryData
 }
 
 interface ProductTransactions {
