@@ -2,7 +2,10 @@ import Api from 'src/database/Api'
 import getCookie from 'src/database/Csrf'
 
 export interface CategoryData {
-  name: string
+  id? : number,
+  name: string,
+  created_at? : string,
+  updated_at? : string
 }
 
 export class Category {

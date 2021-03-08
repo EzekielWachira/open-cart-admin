@@ -4,6 +4,13 @@
       <q-toolbar>
         <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
+        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
+               @click="displayAlter" color="positive"
+               style="background: #37474f" />
+        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
+               @click="refreshCategories" color="positive"
+               :loading="refreshLoading"
+               style="background: #37474f" />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category"
                @click="newCategoryPrompt = true"
                style="background: #37474f" />
@@ -29,8 +36,13 @@
       </div>
       <q-dialog v-model="newProductPrompt" persistent>
         <q-card style="min-width: 350px; width: 450px">
-          <q-card-section>
+          <q-card-section class="row">
             <div class="text-h6">New Product</div>
+            <q-space />
+            <q-btn icon="mdi-refresh-circle" class="text-white q-mr-sm"  dense flat
+                   @click="refreshCategories"
+                   :loading="refreshLoading"
+                   style="background: #37474f" />
           </q-card-section>
 
           <q-card-section class="q-pt-none">
@@ -46,15 +58,30 @@
                      v-model="product.description"
                      />
           </q-card-section>
-          <q-card-section class="q-pt-none">
-            <q-file label="Product Image" outlined dense value="" v-model="product.image">
-              <template v-slot:prepend>
-                <q-icon name="image"/>
-              </template>
-            </q-file>
+<!--          <q-card-section class="q-pt-none">-->
+<!--              <div class="col"></div>-->
+<!--              <q-file label="Product Image" outlined dense value=""-->
+<!--                      v-model="product.image"-->
+<!--                      @change="selectImage"-->
+
+<!--                      type="file"-->
+<!--                      accept="image/*"-->
+<!--              >-->
+<!--                <template v-slot:prepend>-->
+<!--                  <q-icon name="image"/>-->
+<!--                </template>-->
+<!--              </q-file>-->
+<!--          </q-card-section>-->
+          <q-card-section>
+            <q-input type="file" @change="selectImage" @select="selectImage" outlined accept="image/*" />
+          </q-card-section>
+          <q-card-section v-if="previewImage !== ''">
+<!--            <img :src="image">-->
+            <q-img :src="previewImage" height="150px" width="100%" contain/>
           </q-card-section>
           <q-card-section class="q-pt-none">
             <q-select :options="options" label="Category" dense outlined value="" v-model="categoryName"
+              @input="getCategoryId"
             >
               <template v-slot:prepend>
                 <q-icon name="mdi-shape-outline" />
@@ -92,7 +119,7 @@
           <q-card-section class="q-pt-none">
             <q-input dense color="positive"
                      placeholder="Category name" outlined
-                     v-model="categoryData.name"
+                     v-model="category.name"
                      autofocus @keyup.enter="newCategory = false" />
           </q-card-section>
 
@@ -122,10 +149,8 @@ import {Action, Getter} from 'vuex-class'
 import {CategoryData} from "src/database/Category"
 import Api from 'src/database/Api'
 import { Category } from "src/database/Category"
-
-const category = {
-  name: ''
-}
+import { Notification } from "src/utils/Utilities";
+import showNotification from "src/utils/Utilities";
 
 @Component
 export default class Products extends Vue {
@@ -134,14 +159,18 @@ export default class Products extends Vue {
   private newCategoryPrompt = false
   private options: string[] = []
   private product = {
+    category_id: 0,
     name: '',
     description: '',
-    image: '',
-    category_id: 2,
+    image: null,
     price: 99.99
   }
-  private categoryData: string = ""
+  private category : CategoryData = {name: ""}
   private categoryName: string = ""
+  private image: any = ""
+  private previewImage: any = ""
+  private refreshLoading: boolean = false
+  private loadingPercentage: number = 0
 
   @Action('productModule/addProduct') addProduct: any
   @Getter('productModule/getProduct') getProduct: any
@@ -149,58 +178,133 @@ export default class Products extends Vue {
   @Getter('productModule/getAllCategories') allCategories: any
   @Action('productModule/getAllCategories') getCategories: any
 
-  private saveCategory () {
-    console.log("data: " + this.categoryData)
-    // this.addCategory(data)
-    // this.categoryData.name = ''
+  displayAlter () {
+    this.$emit('itemClicked', "Apollo")
   }
 
-  private getCategoryId () {
-    console.log("name is:" + this.categoryName)
+  private selectImage(event: any) : void {
+    console.log(event.target.files)
+    let image = event.target.files[0]
+    this.product.image = image
+    let reader = new FileReader()
+    reader.readAsDataURL(image)
+    reader.onload = (e) => {
+      try {
+        this.previewImage = e.target.result
+        console.log("Image is" + this.image)
+        // this.product.image = this.image
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
+  private saveCategory () : void{
+    console.log(this.category)
+    this.addCategory(this.category)
+    this.getCategories()
+    this.newCategoryPrompt = false
+    this.getCategories()
+
+    this.showNotification(
+      {
+        message: 'Category added successfully',
+        type: 'positive',
+        color: 'positive',
+        icon: 'mdi-check-circle'}
+    )
+    // this.clear()
+  }
+
+  private clear () : void {
+    this.category.name = ""
+  }
+
+  private async getCategoryId (value: any) {
+    console.log(value)
     const category = new Category()
-    let id = 0
-    category.getCategory(this.categoryName).then(response => {
-      id = response.data.id
-      console.log(response.data)
+
+      const response = await category.getCategory(value)
+      console.log(response.data.data.id)
+      this.product.category_id = response.data.data.id
+  }
+
+  private showNotification (this: any, notification : Notification) {
+    this.$q.notify({
+      message: notification.message,
+      color: notification.color,
+      icon: notification.icon,
+      multiLine: notification.multiline,
+      avatar: notification.avatar,
+      actions: notification.action
     })
-    return id
   }
 
   private addProductItem () {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    this.addProduct(this.product)
-    console.log(this.product)
+    let formData = new FormData()
+    formData.append("name", this.product.name)
+    formData.append("description", this.product.description)
+    if (this.product.image !== null){
+      //@ts-ignore
+      formData.append("image", this.product.image)
+    }
+    formData.append("category_id", this.product.category_id.toString())
+    formData.append("price", this.product.price.toString())
+    console.log(`Form data ${formData}`)
+    this.addProduct(formData)
+    this.$emit('ProductAdded')
+
+    this.showNotification(
+      {
+        message: 'Product added successfully',
+        type: 'positive',
+        color: 'positive',
+        icon: 'mdi-check-circle'
+      }
+    )
+
     this.product = {
       name: '',
       description: '',
-      image: '',
+      image: null,
       category_id: 0,
       price: 0
     }
+    this.previewImage = ""
+  }
+
+  private startLoading () : void {
+    this.refreshLoading = true
+    this.getCategories()
+    this.options = []
+    this.allCategories.forEach((data: CategoryData) => {
+      this.options.push(data.name)
+    })
+    setTimeout(() => {
+      this.refreshLoading = false
+      console.log(this.allCategories)
+    }, 2000)
+  }
+
+  private refreshCategories () : void {
+    this.startLoading()
+    // this.getCategories()
   }
 
   created () {
-    // this.$on('ItemClicked', (item: ProductItemInterface) => {
-    //   console.log(item)
-    // })
     this.getCategories()
-    // this.categoryData = this.allCategories
-    // for (let i = 0; i < this.categoryData.length; i++){
-    //   console.log(this.categoryData[i])
-    // }
     this.allCategories.forEach((data: CategoryData) => {
       console.log(data)
       this.options.push(data.name)
       console.log(this.options)
     })
 
-    // this.allCategories.forEach((category: CategoryData) => {
-    //   this.options.push(category.name)
-    // })
-    // console.log(this.allCategories.name)
   }
 
+
   mounted () {
+    this.getCategories()
   }
 }
 </script>
