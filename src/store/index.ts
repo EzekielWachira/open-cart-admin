@@ -1,9 +1,6 @@
 import { store } from 'quasar/wrappers'
 import Vuex from 'vuex'
 
-// import example from './module-example';
-// import { ExampleStateInterface } from './module-example/state';
-import productsModule from './module-products'
 import appModule from './module-app'
 import authModule from './module-auth'
 import productModule from 'src/store/module-product'
@@ -25,8 +22,6 @@ export default store(function ({ Vue }) {
 
   const Store = new Vuex.Store<StateInterface>({
     modules: {
-      // example
-      productsModule,
       appModule,
       authModule,
       productModule

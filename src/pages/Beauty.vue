@@ -31,7 +31,7 @@ export default class Beauty extends Vue {
 
   private async filterProducts () : void {
     this.beautyItems = await this.products.filter((item : ProductItem) => {
-      return item.category_id === 5
+      return item.category?.name === "beauty"
     })
   }
 

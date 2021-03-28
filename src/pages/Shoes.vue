@@ -74,10 +74,11 @@ export default class Shoes extends Vue {
       this.getProducts()
       this.filterProducts()
     })
+    console.log(`SHOES: ${this.shoes}`)
   }
 
   private beforeMount() {
-    this.filterProducts()
+    // this.filterProducts()
   }
 
   private mounted () {

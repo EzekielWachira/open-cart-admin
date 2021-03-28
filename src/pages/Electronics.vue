@@ -35,10 +35,10 @@ export default class Electronics extends Vue {
   @Action('productModule/loggerClick') logClick: any
   @Action('productModule/getAllProducts') getProducts: any
 
-  private async filterProducts () : void {
+  private async filterProducts ()  {
     this.electronics = await this.products.filter(
       (electronic : ProductItem) => {
-        return electronic.category?.name === "Electronics"
+        return electronic.category?.name === "electronics"
       }
     )
   }

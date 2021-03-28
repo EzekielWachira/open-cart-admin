@@ -50,12 +50,12 @@ export default class Clothes extends Vue {
   }
 
   private beforeMount() {
-    this.filterProducts()
+    // this.filterProducts()
   }
 
   private mounted () {
     this.getProducts()
-    // this.filterProducts()
+    this.filterProducts()
   }
 }
 </script>

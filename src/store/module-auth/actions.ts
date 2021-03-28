@@ -39,6 +39,13 @@ const actions: ActionTree<AuthInterface, StateInterface> = {
 
   getToken ({ commit }) {
     commit('getToken', localStorage.getItem('auth_token'))
+  },
+
+  async getAllUsers({ commit }){
+    const user = new User()
+    await user.getAllUsers().then(response => {
+      commit('getAllUsers', response.data.data)
+    })
   }
 }
 

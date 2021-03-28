@@ -192,6 +192,7 @@ export default class Products extends Vue {
     reader.readAsDataURL(image)
     reader.onload = (e) => {
       try {
+        //@ts-ignore
         this.previewImage = e.target.result
         console.log("Image is" + this.image)
         // this.product.image = this.image
