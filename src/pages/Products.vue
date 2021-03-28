@@ -4,13 +4,13 @@
       <q-toolbar>
         <q-toolbar-title>Products</q-toolbar-title>
         <q-space />
-        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense
-               @click="loadRefresh" color="positive"
-               :loading="isDataRefreshed"
-               style="background: #37474f" />
+<!--        <q-btn icon="mdi-refresh-circle" class=" q-mr-sm" round dense-->
+<!--               @click="loadRefresh" color="positive"-->
+<!--               :loading="isDataRefreshed"-->
+<!--               style="background: #37474f" />-->
         <q-btn icon="mdi-refresh-circle" class=" q-mr-sm"  dense
                @click="refreshCategories"
-               :loading="refreshLoading"
+               :loading="refreshLoading" color="positive"
                style="background: #37474f" />
         <q-btn icon-right="mdi-tag-plus" class="text-white q-mr-sm" label="New Category"
                @click="newCategoryPrompt = true"
@@ -78,7 +78,7 @@
           </q-card-section>
           <q-card-section v-if="previewImage !== ''">
 <!--            <img :src="image">-->
-            <q-img :src="previewImage" height="150px" width="100%" contain/>
+            <q-img :src="previewImage" width="100%" contain/>
           </q-card-section>
           <q-card-section class="q-pt-none">
             <q-select :options="options" label="Category" dense outlined value="" v-model="categoryName"

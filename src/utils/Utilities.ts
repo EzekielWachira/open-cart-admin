@@ -24,3 +24,14 @@ export default function showNotification(this: any, notification : Notification)
     actions: notification.action
   })
 }
+
+
+export function trimLongText(textToTrim: string, length: number) : string {
+  let trimmedText : string = ''
+  if (textToTrim.length > length){
+    trimmedText = `${textToTrim.substr(0, length)}...`
+  } else {
+    trimmedText = textToTrim
+  }
+  return trimmedText
+}

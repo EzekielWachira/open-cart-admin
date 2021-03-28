@@ -4,10 +4,10 @@
       <q-img :src="data.image" contain width="100%" height="200px"/>
     </q-card-section>
     <q-card-section class="q-pt-none text-h6">
-      {{ data.name }}
+      {{ trimText(data.name, 25) }}
     </q-card-section>
     <q-card-section class="q-pt-none">
-      {{ data.description }}
+      {{ trimText(data.description, 100) }}
     </q-card-section>
     <q-card-section class="q-pt-none text-positive text-h6">&dollar;{{ data.price }}</q-card-section>
     <q-card-actions class="absolute-bottom-right">
@@ -27,6 +27,7 @@
 import Component from 'vue-class-component'
 import { Vue, Prop } from 'vue-property-decorator'
 import { Action, Getter, State } from 'vuex-class'
+import {trimLongText} from "src/utils/Utilities";
 // import { ProductItemInterface } from 'src/store/module-products/state'
 
 @Component
@@ -41,6 +42,10 @@ export default class Item extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
     this.getProduct(this.index)
     this.$emit('ItemClicked', this.productItem)
+  }
+
+  private trimText(textToTrim: string, length: number) : string {
+    return trimLongText(textToTrim, length)
   }
 }
 </script>
