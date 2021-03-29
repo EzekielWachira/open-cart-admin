@@ -13,6 +13,9 @@ const getters: GetterTree<ProductInterface, StateInterface> = {
   },
   getAllCategories (state: ProductInterface): Array<CategoryData> {
     return state.categories
+  },
+  getProductCount (state : ProductInterface) : number {
+    return state.allProducts.length
   }
 }
 

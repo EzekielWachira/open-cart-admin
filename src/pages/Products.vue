@@ -195,7 +195,6 @@ export default class Products extends Vue {
         //@ts-ignore
         this.previewImage = e.target.result
         console.log("Image is" + this.image)
-        // this.product.image = this.image
       } catch (err) {
         console.log(err)
       }
