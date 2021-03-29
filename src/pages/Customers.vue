@@ -40,11 +40,24 @@
 import {Component, Vue} from "vue-property-decorator";
 import customers from "src/utils/Customers";
 import columns from "src/utils/CustomerColumns";
+import {Action, Getter} from "vuex-class";
 
 @Component
 export default class Settings extends Vue {
   private customerData = customers
   private columns = columns
+
+  @Getter('authModule/getAllUsers') users : any
+  @Action('authModule/getAllUsers') getAllUsers : any
+
+  private created() {
+    this.getAllUsers()
+  }
+
+  private mounted(){
+    console.log(this.users)
+  }
+
 }
 
 </script>

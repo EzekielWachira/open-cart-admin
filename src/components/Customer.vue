@@ -5,7 +5,7 @@
       </q-card-section>
       <q-card-section class="column">
         <div class="text-subtitle1">CUSTOMERS</div>
-        <div class="text-h5">874</div>
+        <div class="text-h5">{{ usersCount }}</div>
       </q-card-section>
     </q-card>
 </template>
@@ -15,6 +15,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 export default class ClassComponent extends Vue {
+  @Prop({default : 0}) readonly usersCount!: any
 }
 </script>
 <style lang="scss" scoped>

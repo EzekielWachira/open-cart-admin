@@ -12,6 +12,12 @@ const getters: GetterTree<AuthInterface, StateInterface> = {
   },
   getLoginStatus (state: AuthInterface): boolean {
     return state.isLoggedIn
+  },
+  getAllUsers (state : AuthInterface) : Array<UserData> {
+    return state.users
+  },
+  getUsersCount (state : AuthInterface) : number {
+    return state.users.length
   }
 }
 

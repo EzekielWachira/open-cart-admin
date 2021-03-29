@@ -29,4 +29,9 @@ export class User {
     await getCookie()
     return Api().get('/user')
   }
+
+  public async getAllUsers() {
+    await getCookie()
+    return Api().get('/users')
+  }
 }

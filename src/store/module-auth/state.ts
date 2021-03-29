@@ -4,6 +4,7 @@ export interface AuthInterface {
   user: UserData
   isLoggedIn: boolean
   accessToken: string
+  users : Array<UserData>
 }
 const state: AuthInterface = {
   user: {
@@ -12,7 +13,8 @@ const state: AuthInterface = {
     password: ''
   },
   isLoggedIn: false,
-  accessToken: ''
+  accessToken: '',
+  users: []
 }
 
 export default state

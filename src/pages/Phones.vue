@@ -38,7 +38,7 @@ export default class Phones extends Vue {
   private async filterProducts () : void {
     this.phones = await this.products.filter(
       (item : ProductItem) => {
-        return item.category_id === 3
+        return item.category?.name === 'phone'
       }
     )
   }

@@ -36,6 +36,11 @@ export default class Clothes extends Vue {
   @Action('productModule/getAllProducts') getProducts: any
   created () {
     this.getProducts()
+    this.$root.$on('refreshClicked', () => {
+      this.getProducts()
+      this.filterProducts()
+      console.log("Refreshing the page")
+    })
   }
 
   private filterProducts () : void {
@@ -45,12 +50,12 @@ export default class Clothes extends Vue {
   }
 
   private beforeMount() {
-    this.filterProducts()
+    // this.filterProducts()
   }
 
   private mounted () {
     this.getProducts()
-    // this.filterProducts()
+    this.filterProducts()
   }
 }
 </script>

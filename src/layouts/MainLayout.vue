@@ -170,8 +170,8 @@ export default class MainLayout extends Vue {
 </script>
 <style lang="scss" scoped>
 .q-item.q-router-link--active{
-  background: #37474f;
-  box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
+  //background: #37474f;
+  //box-shadow: 5px 5px 10px #29353a, -5px -5px 10px #455964;
   color: #21BA45;
 }
 .dark-enabled-btn{

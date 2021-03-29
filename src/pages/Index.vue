@@ -9,10 +9,10 @@
           <orders/>
         </div>
         <div class="col-12 col-md-3 col-sm-6 q-px-xs q-py-sm">
-          <product />
+          <product :product-count="productCount"/>
         </div>
         <div class="col-12 col-md-3 col-sm-6 q-px-xs q-py-sm">
-          <customer />
+          <customer :users-count="usersCount" />
         </div>
       </div>
       <div class="row q-mt-lg q-gutter-y-xs">
@@ -58,13 +58,21 @@ import TopSelllingProduct from "components/TopSelllingProduct.vue";
 import RecentOrders from "components/RecentOrders.vue";
 import Deliveries from "components/Deliveries.vue";
 import { pathToFileURL } from 'url'
+import {Action, Getter} from "vuex-class";
 
 @Component({
   components: { Sales, WeeklySales, Sales2, Orders, Product, Customer, SalesAnalytics,
   TopSelllingProduct, RecentOrders,Deliveries }
 })
 export default class PageIndex extends Vue {
-  // url = openURL('../meee.mkv')
+  @Action('productModule/getAllProducts') getProducts : any
+  @Action("authModule/getAllUsers") getUsers : any
+  @Getter('productModule/getProductCount') productCount: any
+  @Getter('authModule/getUsersCount') usersCount : any
+  private created() {
+    this.getProducts()
+    this.getUsers()
+  }
 }
 </script>
 <style lang="scss" scoped>
